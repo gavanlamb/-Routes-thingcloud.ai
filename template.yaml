@@ -35,3 +35,14 @@ Resources:
                         - 5 ALT2.ASPMX.L.GOOGLE.COM.
                         - 10 ALT3.ASPMX.L.GOOGLE.COM.
                         - 10 ALT4.ASPMX.L.GOOGLE.COM.
+    GoogleMailTxt:
+        Type: AWS::Route53::RecordSetGroup
+        Properties:
+            HostedZoneId:
+                Ref: Zone
+            RecordSets:
+                -   Name: !Sub ${ZoneAddress}.
+                    Type: TXT
+                    TTL: '300'
+                    ResourceRecords:
+                        - '"google-site-verification=IlmweF8P2SDVjy4OuW5ovdbVb0dCN_dZk0LSgfDcgUE"'
