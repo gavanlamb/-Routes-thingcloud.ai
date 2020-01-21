@@ -1,6 +1,11 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Stack for thingcloud.ai dns records that do not belong to child services
+Parameters:
+    ZoneAddress:
+        Type: String
+        Description: Name of the company
+        Default: thingcloud.ai
 Outputs:
     ZoneId:
         Description: Id of the zone
@@ -13,7 +18,7 @@ Resources:
         DeletionPolicy: Retain
         Type: AWS::Route53::HostedZone
         Properties:
-            Name: thingcloud.ai.
+            Name: !Sub ${ZoneAddress}.
     GoogleMx:
         DeletionPolicy: Retain
         Type: AWS::Route53::RecordSetGroup
@@ -21,7 +26,7 @@ Resources:
             HostedZoneId:
                 Ref: Zone
             RecordSets:
-                -   Name: integration.haplo.com.au.
+                -   Name: !Sub ${ZoneAddress}.
                     Type: MX
                     TTL: '300'
                     ResourceRecords:
